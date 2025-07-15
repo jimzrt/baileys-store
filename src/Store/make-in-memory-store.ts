@@ -210,11 +210,11 @@ export default (config: BaileysInMemoryStoreConfig) => {
 			Object.assign(presences[id], update)
 		})
 		ev.on('chats.delete', deletions => {
-			for(const item of deletions) {
-				if(chats.get(item)) {
-					chats.deleteById(item)
-				}
-			}
+			// for(const item of deletions) {
+			// 	if(chats.get(item)) {
+			// 		chats.deleteById(item)
+			// 	}
+			// }
 		})
 		ev.on('messages.upsert', ({ messages: newMessages, type }) => {
 			switch (type) {
@@ -258,17 +258,17 @@ export default (config: BaileysInMemoryStoreConfig) => {
 			}
 		})
 		ev.on('messages.delete', item => {
-			if('all' in item) {
-				const list = messages[item.jid]
-				list?.clear()
-			} else {
-				const jid = item.keys[0].remoteJid!
-				const list = messages[jid]
-				if(list) {
-					const idSet = new Set(item.keys.map(k => k.id))
-					list.filter(m => !idSet.has(m.key.id))
-				}
-			}
+			// if('all' in item) {
+			// 	const list = messages[item.jid]
+			// 	list?.clear()
+			// } else {
+			// 	const jid = item.keys[0].remoteJid!
+			// 	const list = messages[jid]
+			// 	if(list) {
+			// 		const idSet = new Set(item.keys.map(k => k.id))
+			// 		list.filter(m => !idSet.has(m.key.id))
+			// 	}
+			// }
 		})
 
 		ev.on('groups.update', updates => {
